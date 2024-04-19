@@ -11,7 +11,7 @@ text2 = font1.render("Press R to restart",False, "black")
 
 fon = transform.scale(image.load("Fon.jpg"), (700,500))
 line = transform.scale(image.load("Line.png"),(30,150))
-ball = transform.scale(image.load("Ball.png"),(70,70))
+ball = transform.scale(image.load("Ball.png"),(70,70)) #images
 
 class Sprite(sprite.Sprite):
     def __init__(self,image,x,y,speed):
