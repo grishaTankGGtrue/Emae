@@ -57,7 +57,7 @@ class Ball(Sprite):
         self.rect.topleft = (self.x,self.y)
         if self.y < 0: self.speed_y = self.speed_y * -1
         if self.y > 500 - 50: self.speed_y = self.speed_y * -1
-        if self.x < 50: game_end = True
+        if self.x < 30: game_end = True
         if self.x > 650: game_end = True
     def draw(self):
         super().draw()
