@@ -5,7 +5,8 @@ game = True
 game_end = False
 init()
 font1 = font.SysFont("Times New Roman", 30, False)
-text = font1.render("Lose",False, "black")
+text1 = font1.render("Lose",False, "black")
+text2 = font1.render("Press R to restart",False, "black")
 
 
 fon = transform.scale(image.load("Fon.jpg"), (700,500))
@@ -64,23 +65,34 @@ Fon = Sprite(fon,0,0,0)
 racket1 = RacketL(line,30,200,0.1)
 racket2 = RacketR(line,640,200,0.1)
 ball = Ball(ball,350,250,0.15)
+collide = True
 while game:
     for i in event.get():
         if i.type == QUIT:
             game = False
+        if i.type == KEYDOWN:
+            if i.key == K_r:
+                if game_end:
+                    game_end = False
+                    ball.x, ball.y = 350, 250
     if game_end != True:
         racket1.control()
         racket2.control()
         ball.move()
-        if sprite.collide_rect(racket1,ball):
-            ball.speed_x = ball.speed_x * -1
-        if sprite.collide_rect(racket2,ball):
-            ball.speed_x = ball.speed_x * -1
+        if collide == False:
+            if sprite.collide_rect(racket1,ball):
+                ball.speed_x = ball.speed_x * -1 + 0.01
+                collide = True
+        if collide:
+            if sprite.collide_rect(racket2,ball):
+                ball.speed_x = ball.speed_x * -1 - 0.01
+                collide = False
         pass
     Fon.draw()
     racket1.draw()
     racket2.draw()
     ball.draw()
     if game_end == True:
-        win.blit(text,(250,200))
+        win.blit(text1,(250,200))
+        win.blit(text2,(250,240))
     display.update()
